@@ -10,7 +10,7 @@ bot = commands.Bot(command_prefix=config("DISCORD_PREFIX"))
 
 @bot.event
 async def on_ready():
-    print("Slitherton has slithered in")
+    print("CecilBot is here to party!")
 
 
 @bot.command()
@@ -21,7 +21,7 @@ async def ping(ctx):
 # Register Cogs with bot
 for cog in (ROOT_DIR / "cogs").glob("*.py"):
     print(f"Found cog: 'cog.{cog.name[:-3]}'")
-    bot.load_extension(f"slitherton.cogs.{cog.name[:-3]}")
+    bot.load_extension(f"CecilBot.cogs.{cog.name[:-3]}")
 
 
 bot.run(config("DISCORD_BOT_KEY"))

@@ -1,0 +1,142 @@
+Hello everyone. This is Cecil188 on Twitch, or Cecil#3899 on Discord. Naturally, I'm the author of this guide, so if you have any questions about anything related to CecilBot, ask me first. Don't worry, I won't get annoyed regardless of how many questions about the bot you ask. I answer questions for a living.
+
+Before you actually use CecilBot, you'll have to download it unless someone else with the bot is handy and willing to help you out. GreenKnight5, the creator of the bot(no, I didn't make this) has made a tutorial that covers the ins and outs of downloading and setting up the bot: https://www.youtube.com/watch?v=HbnvenHZEc8&t=2s That video's a tad old, but the process should still be identical to what's described in the video, or at least still quite relevant. If you're having trouble setting up the bot regardless, send me a message and I can help you out.
+
+As for how to actually *use* the bot, that's what I'm here today to go over. There are two ways to use the bot: In Twitch chat, or as its standalone program. I'll cover the ins and outs of using it in Twitch chat first, because that's(I assume) the most common way to use it. First, you'll want to actually put the bot in your chat. That sort of helps. I'll outline how to do this below, but once you open it, it'll hopefully be reasonably obvious even without help. Though I think it's weird on a Mac. Don't quote me on that, but if you're using a Mac, and having difficulties, you'll probably have to contact me about it. Once you've put the bot in the channel, it's ready to use. Please only put the bot in *your* channel. Yes, you can put it anywhere and everywhere if you really wanted to, but please don't unless you know the person you're putting the bot with. GreenKnight5 has done a lot for us by creating this bot, I don't want him to have to deal with Twitch sending him an angry message because some jerk dumped this bot in a League of Legends streamer's chat and spammed the chat with CecilBot's largest printouts. So yeah. Don't be dumb, please.
+
+Now that the bot's in the channel, it's ready to use. That was easy. At least, I hope it was. At this point, you can enter in commands and have it return responses. Before that, you may wish to add the bot as a mod for your channel. It allows you to have faster response times, send messages more frequently(if two people enter a command at roughly the same time, it'll print both instead of effectively telling the other guy to screw off through a sustained silence), and it allows the bot to post messages even if you have an emote-chat only(I think. I really hope it does.). The third point is especially important because any information the bot can print out is totally okay for you to have access to even *during* a race. <PLEASE REVIEW AND ADJUST IF REQUIRED> Yes, we want people to develop the skills to race using the bot, but no, we don't want to have someone die 90 minutes into a race because they forgot R-Heavy has W Wind. The (potentially perceived) downside to making the bot a mod is that you have to trust GreenKnight5 and I not to use it for nefarious ends. If you're really concerned with trust issues, we have plenty of people to vouch for us. It's also, at least for me, a pain to think of and make something that would be detrimental to your experience. Aside, you could always just not mod it. Your call.
+
+Rejoice! For the fun part is here! I think I've finally done enough ranting so that I can actually start with the important information, the commands! So, here we go.
+
+I was planning on doing all the main commands first, and then all the minor commands, but I'll break that rule to start with a minor command, the !commands command.
+
+!commands-displays some of the main commands that you might be using the most. It's also got a few irrelevant commands that are for use in the permadeath portion of the Beyond Chaos community. It can help you out in a pinch if you don't want to pull out this document in the middle of a race.
+
+Alright, now for the main commands. A few things, though: Spelling matters! This can be tricky. I *always* use the spelling that's in game. If you want to know what that feather item that brings you back from the dead does, you'll spell it "Fenix Down" and *not* "Phoenix Down." It also *only* takes the SNES translations, as that's the version we play with. So that Shell-setting Esper will be spelled "ZoneSeek" and *not* "Zona Seeker"(what the heck's a Zona?). In most instances, the case doesn't matter, so I'll explicitly state if it does. So I can type "Ultima" if I want, "ultima" if I'm in a rush, "ULtima" if I'm sloppy, or "UlTiMa" if I'm 12. Syntax also matters! I'll go over the specific syntax for each command(with examples, hurray!). If the syntax requires a space somewhere, you must put a space there. If it does not take a hyphen, do not put a hyphen. Now, let's begin.
+
+The !R[skill] command
+Beyond Chaos features random spellsets that can be used as commands. For example, R-White can use any White Magic spell in the game, from Antdot to Life 3. CecilBot can tell you exactly what's in each spellset, because while you can take a guess what R-Bolt does, R-Rare is sort of a whole other ball game. The printout lists spells I consider detrimental in *asterisks.* These are generally skills you don’t want to see. These skills are Bserk, Warp, Quake, Merton, Crusader, Clear, Pep Up, Exploder, W Wind, and Spiraler. Of these 10, the last 8 are the big ones to avoid. To this end, the bot also prints out a threat percentage. This tells you at a glance how likely it is to kill or nearly kill one or all of your characters with your own skill. Bserk and Warp are not included in this count, which is why R-Gray returns a threat percentage of 0%. If a skill has a threat percentage of 0%, you can spam it without fear of harming yourself(though the threat percentage does not cover the threat of reflecting, say, Fire 3 off the enemies from using R-Fire, or confused characters killing themselves with any particular skill).
+
+Syntax
+Most notably, the syntax for this command *does not* use a hyphen. You will enter in !r[skill], where [skill] is the skill suffix as displayed in game.
+
+Examples
+!rfire, !rtime, !rsword, !rheavy
+
+The !W[skill] command, !3x[skill] command, !4x[skill] command, ?[skill]
+
+These don’t exist! Don’t try to use them! Use the equivalent !r[skill] command instead. The spellsets for an R-skill and it’s equivalent W+skill(here I use the notation W+ to refer to any spellset that activates at least twice, as well as chain skills which are denoted by a ?). There are a couple exceptions:
+
+Spiraler cannot be used in W+Heal, W+Blitz, or W+Party. This is a good thing!
+Quadra Slam/Slice cannot be used in W+Sword or W+Phys. This is somewhat inconsequential.
+
+The !boss Command
+
+This command will print out the attacks a boss will use, the elements that the boss absorbs, nullifies, and is weak to, as well as the statuses that the boss is vulnerable to. It also prints out their vanilla HP, MP, and level. Expect the HP and MP of bosses in Beyond Chaos to be slightly higher for the most part. A couple notes: !boss Whelk returns data for the shell, whereas !boss Head must be used to return the data for the head. Marshal and MTek Armor are not in this database, because they are randomized like normal enemies, and thus the bot cannot predict what they will use, or what their stats are. To get Ultros’s data, you must use !boss Ultros1 (no space between “Ultros” and “1”), because while you won’t fight the other 3 Ultroses in a KAN race, they still exist for the permadeath community. The same applies for Kefka, so use !boss Kefka1.
+
+Syntax
+This one’s easy. Just use !boss [boss] and you should be fine.
+
+Examples:
+!boss Leader, !boss Ultros1, !boss TunnelArmr
+
+The !item Command
+
+There are 24 consumables in FFVI, and these are not modified for Beyond Chaos. Green Cherries will always cure Imp, X-Potions always heals 100% of your HP(assuming you’re not undead), and so on. This command will tell you exactly what all these items do.
+
+Syntax
+Another easy one. !item [item] will work.
+
+Examples
+!item Fenix Down, !item Rename Card, !item Sleeping Bag
+
+The !base command
+
+With the introduction of combo skills, this command was made. Its primary function is to let the player know what that combination of 2, 3, 4 letters could possibly be. Sure, StarQua *sounds* cool, but there’s about a 25% change that it ends up killing you. This command will tell you that Qua could indeed be short for Quake. Note that bases are only 2, 3, and 4 letters long. If you get the skill “Harvest” and don’t quite know what that means because no one gives a flying flan about the Harvester skill for the most part, inputting !base Harvest will not yield anything useful. Using !base Harv instead will narrow it down to exactly one possibility, and if not, it’ll hopefully return a short enough list that you can match it to the correct skill. Another use for this is if you’re having trouble spelling a skill for the !skill command(discussed later). Is Strago’s most powerful Lore Grand Train or GrandTrain? The bot will print out the skill names exactly as they are used in other commands.
+
+Syntax
+!base [base]
+This is pretty simple, but this command is *CHARACTER SPECIFIC.* It will not work if you get lazy with capitalization and use !base fire or something. This was done to distinguish between S.Cross and Schiller, for example (SC vs. Sc when as a 2 character base).
+
+Examples
+!base Sc, !base SC, !base Fire, !base Qua
+
+The !skill command
+This command’s sort of my magnum opus, given how large the amount of data I had to write for it was. I hope you find this one useful. This command returns a whole bunch of properties about any skill in the game(almost, I’ll cover that in a bit) such as MP Cost, Power, Hit Rate, Status Effects, if it’s reflectable, if it’s Instant Death, other special properties, and more. It covers nearly anything you may wish to know. One exception to this is that there are two skills that have the exact same name(“Mute”). If Mute has some unexpected properties compared to what’s listed in the bot, the enemy is probably using the other Mute skill. The other exception is enemy physical skills. These are randomly generated and have randomly generated names like HeavyBrave, Butt Sword, or 1000 Q. Because these are randomly generated, the bot can’t predict what these will do. Keep in mind the attack named Bio Blast that uses the Super Ball animation erroneously is the same attack as the Bio Blaster Tool, which use !skill Super Ball.
+
+Syntax
+!skill [skill]
+Nothing fancy here.
+
+Examples
+!skill Fire 3, !skill Flash Rain, !skill SabreSoul, !skill Escape
+
+The !statuseffect Command
+
+This command tells you, about, well, statuses. Shocking. Revolutionary. I am good at naming things. There’s nothing too fancy about this one, but it does cover *a lot* of statuses, even stupid silly stuff like the Air Anchor status or the Casting status. Given that you should be part of the BC Discord, the CecilBot Source Files can give you a complete list of the statuses I’ve covered. They’re also rarely named weirdly because of the sources I took some information from. This command returns Duration, Effect, Appearance, what inflicts, prevents, and cures the status, and maybe some other stuff.
+
+Syntax
+!statuseffect [status]
+You should be pretty good at this by now.
+
+Examples
+!statuseffect Chant!, !statuseffect Poison, !statuseffect Charm
+
+Now for the miscellaneous stuff. Here are some commands that might be useful, but only tell you one specific piece of information, so they’re not quite as pivotal to learn.
+
+!about-Okay, maybe this isn’t too useful. But at least it will tell you who made it and who to contact. If that wasn’t abundantly clear already.
+
+!beyondchaos-This gives a bit of information about the randomizer itself. If you’re practicing, it’s useful to have on hand for your viewers if they’re not familiar with the ins and outs of BC.
+
+!discord-This gives a link to our Discord that you might have gotten to this document from. Neato.
+
+!getbc-This links to the most recent official version, v63. It’s not what we’re going to use for races, but it is an official release, so it works.
+
+!statuseffects-A while ago, before the !statuseffect command was implemented, I hastily threw this command in there. It’s a quick reference for what each of the aura colours means(Haste=Red, for example). Just remember the “s” at the end of “effects.”
+
+!itembreak-Item breaks will be your bread and butter for damage in a lot of seeds, but they’re not identical to the spells that you cast from sources other than Item. This command outlines the special properties that spells cast from items have.
+
+!faq-The creator of Beyond Chaos, abyssonym, made an FAQ for Beyond Chaos. It covers quite a few questions that a beginner might ask(how in the world do you take out Vargas without Blitz, eh?). This command prints a link to it.
+
+!notrunic-There are some Magic spells that can’t be Runicked. They’re here.
+
+!runic-There are some non-Magic spells that can be Runicked. They’re here. Runic is inconsistent, eh?
+
+!gprain-GP Rain uses a unique formula to deal damage and cost money. This command prints it.
+
+!ragnarok-Ragnarok is needlessly complicated. It’s not crucial to learn at all, but if you wanted to, there’s some information.
+
+!getbeta-This links to the current beta, which is something like v64.2 or something, or v64.3 if we decided to release some stuff for the tournament or whatever. The beta’s not an official release, but it’s robust enough that you shouldn’t run into any problems. “Shouldn’t.”
+
+Here’s a summary of all the commands discussed, for quick reference. 
+______________________________________________________________________
+!boss [boss]
+!item [item]
+!base [base]
+!r[skill]
+!skill [skill]
+!statuseffect [status effect]
+
+!about
+!beyondchaos
+!discord
+!getbc
+!commands
+!statuseffects
+!itembreak
+!shadowrun
+!faq
+!notrunic
+!gprain
+!ragnarok
+!runic
+!getbeta
+
+
+Thought we were done? Nope! While that covers how to use the bot through Twitch chat, it is still a standalone program, though with more limited functionality. You’ve also got to add the bot to channels in the first place. It’s pretty straightforward, but let’s go over it for completion’s sake.
+
+First, on the right, is the “Chat Control” panel. If the bot is offline, click “Start Bot” to get things rolling. Then, you can add channels by typing them into the “Enter Channel Here…” text box and then clicking “Add Channel.” Make sure to spell the name right. If it’s added to your channel successfully, it’ll print a cheeky message in chat. If you wanna get rid of it for whatever reason, you can click on your channel and click “Remove Channel. Once again, to reiterate, please only add the bot to your own channel or people you know.
+
+As for the left, there is essentially a clone of the !r[skill], !skill [skill], and !boss [boss] commands. The syntax is a little different here, so follow the example next to the “Search Name” text box. Use the dots above the text box to change between command clones. Once you’ve got the query inputted into the text box, click “Search” to get the fancy details.
+
+Any questions? Once again, you may contact me on Discord or Twitch using the details I provided in the introduction.
