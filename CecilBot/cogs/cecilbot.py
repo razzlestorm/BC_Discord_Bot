@@ -12,7 +12,7 @@ def dict_builder(path=""):
     sheet = book.sheet_by_index(0)
     sheet.cell_value(0, 0)
     data_dictionary = dict()
-
+ 
     for rownum in range(1, sheet.nrows):
         tempdict = dict()
         for cn, values in zip(sheet.row_values(0, 0), sheet.row_values(rownum, 0)):
@@ -53,7 +53,7 @@ def open_mei_fallback(filename, mode='r'):
         f = open(path.join(_MEIPASS, filename), mode)
     return f
 
-
+print(tblpath)
 # Make RE read/do this in the future for any version
 BOSS_MOVES_TABLE = path.join(tblpath, "Boss Moves v7.xls")
 CODES_TABLE = path.join(tblpath, "Codes v5.xls")
@@ -81,6 +81,7 @@ class Data:
         self.status_effects = dict_builder(STATUS_EFFECTS_TABLE)
         self.commands = dict_builder(COMMANDS_TABLE)
 
+data = Data()
 
 class DiscordCecilBot(commands.Cog):
     def __init__(self, client):
@@ -111,8 +112,16 @@ class DiscordCecilBot(commands.Cog):
             await ctx.send('Hello {0.name}... This feels familiar.'.format(member))
         self._last_member = member
 
-    @commands.Cog.listener()
-    async def command_parse(author, message):
+    @commands.command()
+    async def r(self, ctx, argument):
+        print(argument)
+        if '-' in argument:
+            argument = argument[1:]
+        await ctx.send(data.random_skillsets['r' + argument.lower()])
+
+
+    @commands.command()
+    async def command_lookup(self, ctx, argument):
 	    #Data lookup patterns
 	    rchaospattern = r"\A!r-?chaos"
 	    rcommandpattern = r"\A!r-?\w*"

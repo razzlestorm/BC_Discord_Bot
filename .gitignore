@@ -12,6 +12,7 @@
 
 ### dotenv ###
 .env
+.env.sample
 
 ### Linux ###
 *~

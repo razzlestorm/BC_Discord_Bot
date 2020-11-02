@@ -1,1 +1,1 @@
-worker: python -m slitherton
+worker: python -m CecilBot
