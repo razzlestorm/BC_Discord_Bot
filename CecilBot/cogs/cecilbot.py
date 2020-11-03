@@ -251,7 +251,6 @@ class DiscordCecilBot(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        # id = self.client.get_guild(ID)
         channel = message.channel
         channels = ["ask-cecilbot"]
         if message.author == self.client.user:
