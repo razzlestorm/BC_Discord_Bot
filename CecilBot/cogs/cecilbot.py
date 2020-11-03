@@ -3,6 +3,7 @@ from discord import Client
 import re
 from os import path
 import xlrd
+import pprint
 
 # Open specified excel file and read data from file.
 # Warning: when files are updated and their names get changed, you
@@ -91,6 +92,7 @@ class DiscordCecilBot(commands.Cog):
         """
         self.client = client
         self._last_member = None
+        self.printer = pprint.PrettyPrinter(indent=4)
 
 
     def command_lookup(self, author, message):
@@ -124,7 +126,8 @@ class DiscordCecilBot(commands.Cog):
 	    elif re.search(rcommandpattern, message, re.IGNORECASE):
 	        try:
 	            temp = re.sub("!", "", message).lower()
-	            return (data.random_skillsets[temp])
+	            anothertemp = re.sub("r-", "r", temp).lower()
+	            return (data.random_skillsets[anothertemp])
 	        except:
 	            #in case someone enteres a community command that starts with "r"
 	            try:
@@ -254,11 +257,12 @@ class DiscordCecilBot(commands.Cog):
         if message.author == self.client.user:
             return
         if channel.name in channels:
-            print(message.content)
             if message.content.startswith('!'):
-                await channel.send(message.content)
-                print(self.command_lookup(message.author, message.content))
-                await channel.send(self.command_lookup(message.author, message.content))
+                # await channel.send(message.content)
+                # Pprint pretiffies everything, and then calls GK's command_lookup function
+                to_send = self.command_lookup(message.author, message.content)
+                pretty_message = self.printer.pformat(to_send)
+                await channel.send(pretty_message)
 
     @commands.command()
     async def hello(self, ctx,):
