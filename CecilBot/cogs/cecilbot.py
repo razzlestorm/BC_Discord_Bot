@@ -58,7 +58,7 @@ def open_mei_fallback(filename, mode='r'):
 print(tblpath)
 # Make RE read/do this in the future for any version
 BOSS_MOVES_TABLE = path.join(tblpath, "Boss Moves v7.xls")
-CODES_TABLE = path.join(tblpath, "Codes v5.xls")
+CODES_TABLE = path.join(tblpath, "Codes v6.xls")
 ITEM_TABLE = path.join(tblpath, "Item Table v2.xls")
 RANDOM_SKILLSETS_TABLE = path.join(tblpath, "Random Skillsets v2.xls")
 ROOT_TABLE = path.join(tblpath, "Root Table v4.xls")
@@ -275,13 +275,14 @@ class DiscordCecilBot(commands.Cog):
         else:
             await ctx.send('Hello {0.name}... This feels familiar.'.format(member))
         self._last_member = member
-
+    '''
     @commands.command(name='r-')
     async def _r(self, ctx, argument):
         print(argument)
         if '-' in argument:
             argument = argument[1:]
         await ctx.send(data.random_skillsets['r' + argument.lower()])
+    ''''
 
 def setup(client):
     """
