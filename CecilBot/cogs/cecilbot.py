@@ -282,7 +282,7 @@ class DiscordCecilBot(commands.Cog):
         if '-' in argument:
             argument = argument[1:]
         await ctx.send(data.random_skillsets['r' + argument.lower()])
-    ''''
+    '''
 
 def setup(client):
     """
