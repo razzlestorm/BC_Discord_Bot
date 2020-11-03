@@ -269,12 +269,10 @@ class DiscordCecilBot(commands.Cog):
         member = ctx.author
         if self._last_member is None or self._last_member.id != member.id:
             await ctx.send('Hello {0.name}~'.format(member))
-            await ctx.send(ctx.message)
-            await ctx.send(ctx.message.content)
-            print(type(ctx.message.content))
         else:
             await ctx.send('Hello {0.name}... This feels familiar.'.format(member))
         self._last_member = member
+
     '''
     @commands.command(name='r-')
     async def _r(self, ctx, argument):
