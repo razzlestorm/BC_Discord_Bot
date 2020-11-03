@@ -58,7 +58,7 @@ def open_mei_fallback(filename, mode='r'):
 print(tblpath)
 # Make RE read/do this in the future for any version
 BOSS_MOVES_TABLE = path.join(tblpath, "Boss Moves v7.xls")
-CODES_TABLE = path.join(tblpath, "Codes v6.xls")
+CODES_TABLE = path.join(tblpath, "Codes_v6.xls")
 ITEM_TABLE = path.join(tblpath, "Item Table v2.xls")
 RANDOM_SKILLSETS_TABLE = path.join(tblpath, "Random Skillsets v2.xls")
 ROOT_TABLE = path.join(tblpath, "Root Table v4.xls")
