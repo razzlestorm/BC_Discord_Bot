@@ -242,9 +242,9 @@ class DiscordCecilBot(commands.Cog):
 	            temp = re.sub("!", "", message).lower()
 	            return (data.commands[temp])
 	        except:
-	            return "Null"
+	            return "That command didn't work, check your spelling and try again!"
 	    else:
-	        return "Null"
+	        return "That command didn't work, check your spelling and try again!"
 
 
     @commands.Cog.listener()
@@ -269,6 +269,8 @@ class DiscordCecilBot(commands.Cog):
                 to_send = self.command_lookup(message.author, message.content)
                 if isinstance(to_send, dict):
                     pretty_message = self.printer.pformat(to_send)
+                    if "response" in to_send:
+                        pretty_message = to_send["response"]
                     await channel.send(pretty_message)
                 else:
                     pretty_message = eval(self.printer.pformat(to_send))
