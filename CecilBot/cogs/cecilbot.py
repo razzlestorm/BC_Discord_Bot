@@ -92,7 +92,7 @@ class DiscordCecilBot(commands.Cog):
         """
         self.client = client
         self._last_member = None
-        self.printer = pprint.PrettyPrinter(indent=4)
+        self.printer = pprint.PrettyPrinter(indent=1, width=105)
 
 
     def command_lookup(self, author, message):
@@ -118,6 +118,7 @@ class DiscordCecilBot(commands.Cog):
 	    getbcpattern = r"\A!getbc"
 	    permadeath = r"\A!permadeath"
 	    aboutpattern = r"\A!about"
+	    helppattern = r"\A!help"
 
 
 	    if re.search(rchaospattern, message, re.IGNORECASE):
@@ -202,16 +203,16 @@ class DiscordCecilBot(commands.Cog):
 	    elif re.search(hellopattern, message, re.IGNORECASE):
 	        return f"Hello {author}!"
 	    elif re.search(commandspattern, message, re.IGNORECASE):
-	        return "Basic commands: !hello, !about, !getBC, !discord, !beyondchaos, !permadeath " \
-	               "<!R[spell] commands: ex.'!RTime'> " \
-	               "<!Skill [SkillName] commands: ex.'!skill fire 3'> " \
-	               "<!Boss [BossName] commands: ex. '!boss Kefka3'> " \
-	               "<!Code [CodeName] commands: ex. '!code capslockoff'> " \
-	               "<!Item [ItemName] commands: ex. '!item potion'> " \
-	               "<!StatusEffect [EffectName] commands: ex: '!statuseffect poison'> " \
-	               "<!Base [SkillBase] commands: ex. '!base Fir'> " \
-	               "<!SpecialEquipment [EquipName] commands: ex. '!specialequipment red duster'> " \
-	               "<!SpecialWeapons [WeaponName] commands: ex. '!specialweapon portal gun'>"
+	        return "Basic commands: !hello, !about, !getBC, !discord, !beyondchaos, !permadeath \n" \
+	               "<!R[spell] commands: ex.'!RTime'> \n" \
+	               "<!Skill [SkillName] commands: ex.'!skill fire 3'> \n" \
+	               "<!Boss [BossName] commands: ex. '!boss Kefka3'> \n" \
+	               "<!Code [CodeName] commands: ex. '!code capslockoff'> \n" \
+	               "<!Item [ItemName] commands: ex. '!item potion'> \n" \
+	               "<!StatusEffect [EffectName] commands: ex: '!statuseffect poison'> \n" \
+	               "<!Base [SkillBase] commands: ex. '!base Fir'> \n" \
+	               "<!SpecialEquipment [EquipName] commands: ex. '!specialequipment red duster'> \n" \
+	               "<!SpecialWeapons [WeaponName] commands: ex. '!specialweapon portal gun'> \n"
 	    elif re.search(beyondchaospattern, message, re.IGNORECASE):
 	        return "Originally developed by Abyssonym, but now maintained by SubtractionSoup, " \
 	               "Beyond Chaos is a randomizer, a program that remixes game content randomly, " \
@@ -229,7 +230,13 @@ class DiscordCecilBot(commands.Cog):
 	        return "CecilBot is a program to help players by providing a list of skills and " \
 	               "spells within each skill-set. CecilBot was made by GreenKnight5 and inspired by " \
 	               "FF6Rando community member Cecil188, and uses databases authored by Cecil188. " \
-	               "Please PM any questions, comments, concerns to @GreenKnight5 or @Cecil188."
+	               "Please PM any questions, comments, concerns to @GreenKnight5,  @Cecil188, or @RazzleStorm."
+	    elif re.search(helppattern, message, re.IGNORECASE):
+	        text = "The Discord Cecilbot should function almost exactly " \
+	        "like your familiar Twitch Cecilbot. Type !commands to see " \
+	        "the most common commands and their syntax. Check the pins in " \
+	        "this channel for a more detailed explanation."
+	        return text
 	    elif re.search(communitycommandpattern, message, re.IGNORECASE):
 	        try:
 	            temp = re.sub("!", "", message).lower()
@@ -260,8 +267,12 @@ class DiscordCecilBot(commands.Cog):
                 # await channel.send(message.content)
                 # Pprint pretiffies everything, and then calls GK's command_lookup function
                 to_send = self.command_lookup(message.author, message.content)
-                pretty_message = self.printer.pformat(to_send)
-                await channel.send(pretty_message)
+                if isinstance(to_send, dict):
+                    pretty_message = self.printer.pformat(to_send)
+                    await channel.send(pretty_message)
+                else:
+                    pretty_message = eval(self.printer.pformat(to_send))
+                    await channel.send(pretty_message)
 
     @commands.command()
     async def hello(self, ctx,):
