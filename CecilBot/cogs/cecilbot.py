@@ -1,4 +1,5 @@
 from discord.ext import commands
+from discord import Client
 import re
 from os import path
 import xlrd
@@ -12,7 +13,7 @@ def dict_builder(path=""):
     sheet = book.sheet_by_index(0)
     sheet.cell_value(0, 0)
     data_dictionary = dict()
- 
+
     for rownum in range(1, sheet.nrows):
         tempdict = dict()
         for cn, values in zip(sheet.row_values(0, 0), sheet.row_values(rownum, 0)):
@@ -91,37 +92,8 @@ class DiscordCecilBot(commands.Cog):
         self.client = client
         self._last_member = None
 
-    @commands.Cog.listener()
-    async def on_ready(self):
-        """
-        Any listeners you add will be effectively merged with the global listeners,
-        which means you can have multiple cogs listening for the same events and
-        taking actions based on those events.
-        """
-        print("Example extension has been loaded")
 
-    @commands.command()
-    async def hello(self, ctx,):
-        """Says hello"""
-        member = ctx.author
-        if self._last_member is None or self._last_member.id != member.id:
-            await ctx.send('Hello {0.name}~'.format(member))
-            await ctx.send(ctx.message)
-            await ctx.send(ctx.message.content)
-        else:
-            await ctx.send('Hello {0.name}... This feels familiar.'.format(member))
-        self._last_member = member
-
-    @commands.command()
-    async def r(self, ctx, argument):
-        print(argument)
-        if '-' in argument:
-            argument = argument[1:]
-        await ctx.send(data.random_skillsets['r' + argument.lower()])
-
-
-    @commands.command()
-    async def command_lookup(self, ctx, argument):
+    def command_lookup(self, author, message):
 	    #Data lookup patterns
 	    rchaospattern = r"\A!r-?chaos"
 	    rcommandpattern = r"\A!r-?\w*"
@@ -133,7 +105,7 @@ class DiscordCecilBot(commands.Cog):
 	    specialequipmentpattern = r"\A!specialequipment\s.*"
 	    specialweaponpattern = r"\A!specialweapon\s.*"
 	    statuseffectpattern = r"\A!statuseffect\s\.*"
-	    rootpattern = r"\A!base\s.*"
+	    rootpattern = r"\A?base\s.*"
 	    communitycommandpattern = r"\A!.*"
 
 	    #General command patterns
@@ -264,6 +236,49 @@ class DiscordCecilBot(commands.Cog):
 	    else:
 	        return "Null"
 
+
+    @commands.Cog.listener()
+    async def on_ready(self):
+        """
+        Any listeners you add will be effectively merged with the global listeners,
+        which means you can have multiple cogs listening for the same events and
+        taking actions based on those events.
+        """
+        print("CecilBot extension has been loaded")
+
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        # id = self.client.get_guild(ID)
+        channel = message.channel
+        channels = ["ask-cecilbot"]
+        if message.author == self.client.user:
+            return
+        if channel.name in channels:
+            print(message.content)
+            if message.content.startswith('!'):
+                await channel.send(message.content)
+                print(self.command_lookup(message.author, message.content))
+                await channel.send(self.command_lookup(message.author, message.content))
+
+    @commands.command()
+    async def hello(self, ctx,):
+        """Says hello"""
+        member = ctx.author
+        if self._last_member is None or self._last_member.id != member.id:
+            await ctx.send('Hello {0.name}~'.format(member))
+            await ctx.send(ctx.message)
+            await ctx.send(ctx.message.content)
+            print(type(ctx.message.content))
+        else:
+            await ctx.send('Hello {0.name}... This feels familiar.'.format(member))
+        self._last_member = member
+
+    @commands.command(name='r-')
+    async def _r(self, ctx, argument):
+        print(argument)
+        if '-' in argument:
+            argument = argument[1:]
+        await ctx.send(data.random_skillsets['r' + argument.lower()])
 
 def setup(client):
     """

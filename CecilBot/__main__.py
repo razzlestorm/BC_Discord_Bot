@@ -5,15 +5,15 @@ from discord.ext import commands
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent
 
-bot = commands.Bot(command_prefix=config("DISCORD_PREFIX"))
+client = commands.Bot(command_prefix=config("DISCORD_PREFIX"))
 
 
-@bot.event
+@client.event
 async def on_ready():
     print("CecilBot is here to party!")
 
 
-@bot.command()
+@client.command()
 async def ping(ctx):
     await ctx.send("PONG")
 
@@ -21,7 +21,7 @@ async def ping(ctx):
 # Register Cogs with bot
 for cog in (ROOT_DIR / "cogs").glob("*.py"):
     print(f"Found cog: 'cog.{cog.name[:-3]}'")
-    bot.load_extension(f"CecilBot.cogs.{cog.name[:-3]}")
+    client.load_extension(f"CecilBot.cogs.{cog.name[:-3]}")
 
 
-bot.run(config("DISCORD_BOT_KEY"))
+client.run(config("DISCORD_BOT_KEY"))
