@@ -107,7 +107,7 @@ class DiscordCecilBot(commands.Cog):
 	    specialequipmentpattern = r"\A!specialequipment\s.*"
 	    specialweaponpattern = r"\A!specialweapon\s.*"
 	    statuseffectpattern = r"\A!statuseffect\s\.*"
-	    rootpattern = r"\A?base\s.*"
+	    rootpattern = r"\A!base\s.*"
 	    communitycommandpattern = r"\A!.*"
 
 	    #General command patterns
