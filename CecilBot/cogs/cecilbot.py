@@ -197,7 +197,7 @@ class DiscordCecilBot(commands.Cog):
 	            return (data.root_table[temp])
 	        except:
 	            return (f"Sorry, could not find {temp}. Please check your spelling "
-	                  f"and try again. REMEBER: capitalization matters!")
+	                  f"and try again. REMEMBER: capitalization matters!")
 
 
 	    elif re.search(hellopattern, message, re.IGNORECASE):
