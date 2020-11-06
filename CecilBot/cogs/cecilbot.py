@@ -92,8 +92,7 @@ class DiscordCecilBot(commands.Cog):
         """
         self.client = client
         self._last_member = None
-        self.printer = pprint.PrettyPrinter(indent=1, width=105)
-
+        self.printer = pprint.PrettyPrinter(indent=2, width=105)
 
     def command_lookup(self, author, message):
 	    #Data lookup patterns
@@ -246,6 +245,7 @@ class DiscordCecilBot(commands.Cog):
 	    else:
 	        return "That command didn't work, check your spelling and try again!"
 
+### Start discord.py Bot functionality ###
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -275,6 +275,13 @@ class DiscordCecilBot(commands.Cog):
                 else:
                     pretty_message = eval(self.printer.pformat(to_send))
                     await channel.send(pretty_message)
+
+    @commands.command()
+    async def add(self, ctx, argument):
+        member = ctx.author
+        print(member.roles)
+        print(argument)
+
 
     @commands.command()
     async def hello(self, ctx,):
