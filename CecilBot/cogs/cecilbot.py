@@ -83,6 +83,95 @@ class Data:
         self.status_effects = dict_builder(STATUS_EFFECTS_TABLE)
         self.commands = dict_builder(COMMANDS_TABLE)
 
+class Entry:
+    def __init__(self, entry, desc):
+        self.entry = entry
+        self.desc = desc
+
+class Boss:
+    def __init__(self, **kwargs):
+        self.name = kwargs.get('name')
+        self.level = kwargs.get('level')
+        self.HP = kwargs.get('HP')
+        self.MP = kwargs.get('MP')
+        self.skills = kwargs.get('skills')
+        self.statuses = kwargs.get('statuses')
+        self.absorbs = kwargs.get('absorbs')
+        self.nullifies = kwargs.get('nullifies')
+        self.weaknesses = kwargs.get('weaknesses')
+
+class Random:
+    def __init__(self, entry, spell_list, danger):
+        self.entry = entry
+        self.spell_list = spell_list
+        self.danger = danger
+
+class Skill:
+    def __init__(self, **kwargs):
+        self.name = kwargs.get('name')
+        self.MP_cost = kwargs.get('MP_cost')
+        self.power = kwargs.get('power')
+        self.acc = kwargs.get('acc')
+        self.elements = kwargs.get('elements')
+        self.statuses = kwargs.get('statuses')
+        self.healing = kwargs.get('healing')
+        self.runic = kwargs.get('runic')
+        self.split = kwargs.get('split')
+        self.reflects = kwargs.get('reflects')
+        self.phys = kwargs.get('phys')
+        self.ignores_def = kwargs.get('ignores_def')
+        self.unblockable = kwargs.get('unblockable')
+        self.instant_death = kwargs.get('instant_death')
+        self.special_effects = kwargs.get('special_effects')
+
+class SWeapon:
+    def __init__(self, **kwargs):
+        self.name = kwargs.get('name')
+        self.power = kwargs.get('power')
+        self.stats = kwargs.get('stats')
+        self.evade = kwargs.get('evade')
+        self.MEvade = kwargs.get('MEvade')
+        self.elements = kwargs.get('elements')
+        self.learn = kwargs.get('learn')
+        self.break = kwargs.get('break')
+        self.proc = kwargs.get('proc')
+        self.hit_rate = kwargs.get('hit_rate')
+        self.equip = kwargs.get('equip')
+        self.statuses = kwargs.get('statuses')
+        self.immunities = kwargs.get('immunities')
+        self.specials = kwargs.get('specials')
+
+class SEquipment:
+    def __init__(self, **kwargs):
+        self.name = kwargs.get('name')
+        self.type = kwargs.get('type')
+        self.def = kwargs.get('def')
+        self.MDef = kwargs.get('MDef')
+        self.stats = kwargs.get('stats')
+        self.evade = kwargs.get('evade')
+        self.MEvade = kwargs.get('MEvade')
+        self.elenull = kwargs.get('elenull')
+        self.elehalve = kwargs.get('elehalve')
+        self.eleabsorb = kwargs.get('eleabsorb')
+        self.eleweak = kwargs.get('eleweak')
+        self.break = kwargs.get('break')
+        self.learn = kwargs.get('learn')
+        self.equip = kwargs.get('equip')
+        self.statuses = kwargs.get('statuses')
+        self.immunities = kwargs.get('immunities')
+        self.specials = kwargs.get('specials')
+
+class Status:
+    def __init(self, **kwargs):
+        self.name = kwargs.get('name')
+        self.type = kwargs.get('type')
+        self.appearance = kwargs.get('appearance')
+        self.duration = kwargs.get('duration')
+        self.desc = kwargs.get('desc')
+        self.source = kwargs.get('source')
+        self.healedby = kwargs.get('healedby')
+        self.prevent = kwargs.get('prevent')
+
 data = Data()
 
 class DiscordCecilBot(commands.Cog):
@@ -277,10 +366,38 @@ class DiscordCecilBot(commands.Cog):
                     await channel.send(pretty_message)
 
     @commands.command()
-    async def add(self, ctx, argument):
+    async def add(self, ctx, *args):
+        '''
+        Parameters
+        -----------
+        args : These args are expected in the following order:
+            [Command (e.g. Skill, Boss, Item, etc.)][EntryName][Entry]
+        Possible tables to add an entry to are:
+        BOSS_MOVES_TABLE
+        CODES_TABLE
+        ITEM_TABLE
+        RANDOM_SKILLSETS_TABLE
+        ROOT_TABLE
+        SKILL_PARAMETERS_TABLE
+        SPECIAL_EQUIPMENT_TABLE
+        SPECIAL_WEAPONS_TABLE
+        STATUS_EFFECTS_TABLE
+        COMMANDS_TABLE
+       "<!R[spell] commands: ex.'!RTime'> \n" \
+       "<!Skill [SkillName] commands: ex.'!skill fire 3'> \n" \
+       "<!Boss [BossName] commands: ex. '!boss Kefka3'> \n" \
+       "<!Code [CodeName] commands: ex. '!code capslockoff'> \n" \
+       "<!Item [ItemName] commands: ex. '!item potion'> \n" \
+       "<!StatusEffect [EffectName] commands: ex: '!statuseffect poison'> \n" \
+       "<!Base [SkillBase] commands: ex. '!base Fir'> \n" \
+       "<!SpecialEquipment [EquipName] commands: ex. '!specialequipment red duster'> \n" \
+       "<!SpecialWeapons [WeaponName] commands: ex. '!specialweapon portal gun'>
+
+        '''
         member = ctx.author
         print(member.roles)
-        print(argument)
+        print(args)
+
 
 
     @commands.command()
