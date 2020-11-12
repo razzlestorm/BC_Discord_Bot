@@ -70,7 +70,7 @@ STATUS_EFFECTS_TABLE = path.join(tblpath, "Status Effects v3.xls")
 COMMANDS_TABLE = path.join(tblpath, "Commands v1.xls")
 
 
-
+# Create a class to pull from DB
 class Data:
     def __init__(self):
         self.boss_moves = dict_builder(BOSS_MOVES_TABLE)
