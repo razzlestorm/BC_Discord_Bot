@@ -21,6 +21,7 @@ async def ping(ctx):
 # Register Cogs with bot
 for cog in (ROOT_DIR / "cogs").glob("*.py"):
     print(f"Found cog: 'cog.{cog.name[:-3]}'")
+    # If run as a Python module with -m, this path will need to be changed to "CecilBot/cogs."
     client.load_extension(f"cogs.{cog.name[:-3]}")
 
 
