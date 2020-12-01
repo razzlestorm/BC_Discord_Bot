@@ -68,6 +68,7 @@ SPECIAL_EQUIPMENT_TABLE = path.join(tblpath, "Special Equipment v3.xls")
 SPECIAL_WEAPONS_TABLE = path.join(tblpath, "Special Weapons v4.xls")
 STATUS_EFFECTS_TABLE = path.join(tblpath, "Status Effects v3.xls")
 COMMANDS_TABLE = path.join(tblpath, "Commands v1.xls")
+TOOLS_TABLE = path.join(tblpath, "Tools List v1.xls")
 
 
 # Create a class to pull from DB
@@ -83,6 +84,7 @@ class Data:
         self.special_weapons = dict_builder(SPECIAL_WEAPONS_TABLE)
         self.status_effects = dict_builder(STATUS_EFFECTS_TABLE)
         self.commands = dict_builder(COMMANDS_TABLE)
+        self.tools = dict_builder(TOOLS_TABLE)
 
 class Entry:
     def __init__(self, entry, desc):
@@ -163,7 +165,7 @@ class SEquipment:
         self.specials = kwargs.get('specials')
 
 class Status:
-    def __init(self, **kwargs):
+    def __init__(self, **kwargs):
         self.name = kwargs.get('name')
         self.type = kwargs.get('type')
         self.appearance = kwargs.get('appearance')
@@ -172,6 +174,19 @@ class Status:
         self.source = kwargs.get('source')
         self.healedby = kwargs.get('healedby')
         self.prevent = kwargs.get('prevent')
+
+class Tool:
+    def __init__(self, **kwargs):
+        self.name = kwargs.get('name')
+        self.power = kwargs.get('power')
+        self.element = kwargs.get('element')
+        self.status = kwargs.get('status')
+        self.phys = kwargs.get('phys')
+        self.ignores_def = kwargs.get('ignores_def')
+        self.instant_death = kwargs.get('instant_death')
+        self.special_effects = kwargs.get('special_effects')
+
+
 
 data = Data()
 
@@ -193,6 +208,7 @@ class DiscordCecilBot(commands.Cog):
 	    bosspattern = r"\A!boss\s.*"
 	    codepattern = r"\A!code[s]?\s\w*"
 	    itempattern = r"\A!item\s.*"
+	    toolpattern = r"\A!tool\s.*"
 	    specialequipmentpattern = r"\A!specialequipment\s.*"
 	    specialweaponpattern = r"\A!specialweapon\s.*"
 	    statuseffectpattern = r"\A!statuseffect\s\.*"
@@ -242,6 +258,13 @@ class DiscordCecilBot(commands.Cog):
 	    elif re.search(bosspattern, message, re.IGNORECASE):
 	        try:
 	            temp = re.sub("!boss ", "", message).lower()
+	            return (data.boss_moves[temp])
+	        except:
+	            return (f"Sorry, could not find {temp}. Please check your spelling "
+	                  f"and try again.")
+	    elif re.search(toolpattern, message, re.IGNORECASE):
+	        try:
+	            temp = re.sub("!tool ", "", message).lower()
 	            return (data.boss_moves[temp])
 	        except:
 	            return (f"Sorry, could not find {temp}. Please check your spelling "
