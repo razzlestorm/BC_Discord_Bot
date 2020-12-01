@@ -58,12 +58,12 @@ def open_mei_fallback(filename, mode='r'):
 print(tblpath)
 # Make RE read/do this in the future for any version
 # Potentially create a database for this
-BOSS_MOVES_TABLE = path.join(tblpath, "Boss Moves v7.xls")
-CODES_TABLE = path.join(tblpath, "Codes_v6.xls")
+BOSS_MOVES_TABLE = path.join(tblpath, "Boss Moves v7.1.xls")
+CODES_TABLE = path.join(tblpath, "Codes v5.1.xls")
 ITEM_TABLE = path.join(tblpath, "Item Table v2.xls")
 RANDOM_SKILLSETS_TABLE = path.join(tblpath, "Random Skillsets v2.xls")
 ROOT_TABLE = path.join(tblpath, "Root Table v4.xls")
-SKILL_PARAMETERS_TABLE = path.join(tblpath, "Skill Parameters v3.xls")
+SKILL_PARAMETERS_TABLE = path.join(tblpath, "Skill Parameters v3.1.xls")
 SPECIAL_EQUIPMENT_TABLE = path.join(tblpath, "Special Equipment v3.xls")
 SPECIAL_WEAPONS_TABLE = path.join(tblpath, "Special Weapons v4.xls")
 STATUS_EFFECTS_TABLE = path.join(tblpath, "Status Effects v3.xls")
