@@ -265,7 +265,7 @@ class DiscordCecilBot(commands.Cog):
 	    elif re.search(toolpattern, message, re.IGNORECASE):
 	        try:
 	            temp = re.sub("!tool ", "", message).lower()
-	            return (data.boss_moves[temp])
+	            return (data.tools[temp])
 	        except:
 	            return (f"Sorry, could not find {temp}. Please check your spelling "
 	                  f"and try again.")
