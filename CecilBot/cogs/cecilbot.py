@@ -250,62 +250,62 @@ class DiscordCecilBot(commands.Cog):
 
 	    elif skillpattern.search(message):
 	        try:
-	            temp = re.sub("!skill ", "", message, re.IGNORECASE).lower()
+	            temp = re.sub("!skill ", "", message, flags=re.IGNORECASE).lower()
 	            return (data.skill_parameters[temp])
 	        except:
 	            return (f"Sorry, could not find {temp}. Please check your spelling "
 	                  f"and try again.")
 	    elif bosspattern.search(message):
 	        try:
-	            temp = re.sub("!boss ", "", message, re.IGNORECASE).lower()
+	            temp = re.sub("!boss ", "", message, flags=re.IGNORECASE).lower()
 	            return (data.boss_moves[temp])
 	        except:
 	            return (f"Sorry, could not find {temp}. Please check your spelling "
 	                  f"and try again.")
 	    elif codepattern.search(message):
 	        try:
-	            temp = re.sub("!code ", "", message, re.IGNORECASE).lower()
+	            temp = re.sub("!code ", "", message, flags=re.IGNORECASE).lower()
 	            return (data.codes[temp])
 	        except:
 	            return (f"Sorry, could not find {temp}. Please check your spelling "
 	                  f"and try again.")
 	    elif itempattern.search(message):
 	        try:
-	            temp = re.sub("!item ", "", message, re.IGNORECASE).lower()
+	            temp = re.sub("!item ", "", message, flags=re.IGNORECASE).lower()
 	            return (data.item_table[temp])
 	        except:
 	            return (f"Sorry, could not find {temp}. Please check your spelling "
 	                  f"and try again.")
 	    elif toolpattern.search(message):
 	        try:
-	            temp = re.sub("!tool ", "", message, re.IGNORECASE).lower()
+	            temp = re.sub("!tool ", "", message, flags=re.IGNORECASE).lower()
 	            return (data.tools[temp])
 	        except:
 	            return (f"Sorry, could not find {temp}. Please check your spelling "
 	                  f"and try again.")
 	    elif specialequipmentpattern.search(message):
 	        try:
-	            temp = re.sub("!specialequipment ", "", message, re.IGNORECASE).lower()
+	            temp = re.sub("!specialequipment ", "", message, flags=re.IGNORECASE).lower()
 	            return (data.special_equipment[temp])
 	        except:
 	            return (f"Sorry, could not find {temp}. Please check your spelling "
 	                  f"and try again.")
 	    elif specialweaponpattern.search(message):
 	        try:
-	            temp = re.sub("!specialweapon ", "", message, re.IGNORECASE).lower()
+	            temp = re.sub("!specialweapon ", "", message, flags=re.IGNORECASE).lower()
 	            return (data.special_weapons[temp])
 	        except:
 	            return (f"Sorry, could not find {temp}. Please check your spelling "
 	                  f"and try again.")
 	    elif statuseffectpattern.search(message):
 	        try:
-	            temp = re.sub("!statuseffect ", "", message, re.IGNORECASE).lower()
+	            temp = re.sub("!statuseffect ", "", message, flags=re.IGNORECASE).lower()
 	            return (data.status_effects[temp])
 	        except:
 	            pass
 	    elif rootpattern.search(message):
 	        try:
-	            temp = re.sub("!base ", "", message, re.IGNORECASE)
+	            temp = re.sub("!base ", "", message, flags=re.IGNORECASE)
 	            return (data.root_table[temp])
 	        except:
 	            return (f"Sorry, could not find {temp}. Please check your spelling "
