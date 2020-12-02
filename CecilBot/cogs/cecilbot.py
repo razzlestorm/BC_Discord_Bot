@@ -201,35 +201,35 @@ class DiscordCecilBot(commands.Cog):
 
     def command_lookup(self, author, message):
 	    #Data lookup patterns
-	    rchaospattern = r"\A!r-?chaos"
-	    rcommandpattern = r"\A!r-?\w*"
-	    wcommandpattern = r"\A![w|?|3x]-\w*"
-	    skillpattern = r"\A!skill\s.*"
-	    bosspattern = r"\A!boss\s.*"
-	    codepattern = r"\A!code[s]?\s\w*"
-	    itempattern = r"\A!item\s.*"
-	    toolpattern = r"\A!tool\s.*"
-	    specialequipmentpattern = r"\A!specialequipment\s.*"
-	    specialweaponpattern = r"\A!specialweapon\s.*"
-	    statuseffectpattern = r"\A!statuseffect\s\.*"
-	    rootpattern = r"\A!base\s.*"
-	    communitycommandpattern = r"\A!.*"
+	    rchaospattern = re.compile(r"\A!r-?chaos", re.IGNORECASE)
+	    rcommandpattern = re.compile(r"\A!r-?\w*", re.IGNORECASE)
+	    wcommandpattern = re.compile(r"\A![w|?|3x]-\w*", re.IGNORECASE)
+	    skillpattern = re.compile(r"\A!skill\s.*", re.IGNORECASE)
+	    bosspattern = re.compile(r"\A!boss\s.*", re.IGNORECASE)
+	    codepattern = re.compile(r"\A!code[s]?\s\w*", re.IGNORECASE)
+	    itempattern = re.compile(r"\A!item\s.*", re.IGNORECASE)
+	    toolpattern = re.compile(r"\A!tool\s.*", re.IGNORECASE)
+	    specialequipmentpattern = re.compile(r"\A!specialequipment\s.*", re.IGNORECASE)
+	    specialweaponpattern = re.compile(r"\A!specialweapon\s.*", re.IGNORECASE)
+	    statuseffectpattern = re.compile(r"\A!statuseffect\s\.*", re.IGNORECASE)
+	    rootpattern = re.compile(r"\A!base\s.*", re.IGNORECASE)
 
 	    #General command patterns
-	    hellopattern = r"\A!hello"
-	    commandspattern = r"\A!command[s]?"
-	    beyondchaospattern = "\A!beyondchaos"
-	    discordpattern = r"\A!discord"
-	    getbcpattern = r"\A!getbc"
-	    permadeath = r"\A!permadeath"
-	    aboutpattern = r"\A!about"
-	    helppattern = r"\A!help"
+	    hellopattern = re.compile(r"\A!hello", re.IGNORECASE)
+	    commandspattern = re.compile(r"\A!command[s]?", re.IGNORECASE)
+	    beyondchaospattern = re.compile("\A!beyondchaos", re.IGNORECASE)
+	    getbcpattern = re.compile(r"\A!getbc", re.IGNORECASE)
+	    discordpattern = re.compile(r"\A!discord", re.IGNORECASE)
+	    permadeath = re.compile(r"\A!permadeath", re.IGNORECASE)
+	    aboutpattern = re.compile(r"\A!about", re.IGNORECASE)
+	    helppattern = re.compile(r"\A!help", re.IGNORECASE)
+	    communitycommandpattern = re.compile(r"\A!.*", re.IGNORECASE)
 
 
-	    if re.search(rchaospattern, message, re.IGNORECASE):
+	    if rchaospattern.search(message):
 	        return "It's literally every spell/skill in the game in one spellset. Threat:(8/255)"
 
-	    elif re.search(rcommandpattern, message, re.IGNORECASE):
+	    elif rcommandpattern.search(message):
 	        try:
 	            temp = re.sub("!", "", message).lower()
 	            anothertemp = re.sub("r-", "r", temp).lower()
@@ -242,68 +242,68 @@ class DiscordCecilBot(commands.Cog):
 	            except:
 	                return "Null"
 
-	    elif re.search(wcommandpattern, message, re.IGNORECASE):
+	    elif wcommandpattern.search(message):
 	        return "W-/?-/3x-[spellset] is just like r-[spellset] but " \
 	               "gets cast more than once. NOTE: These spellsets that " \
 	               "include Spiraler, Quadra Slam, and/or Quadra Slice will " \
 	               "not cast those spells!"
 
-	    elif re.search(skillpattern, message, re.IGNORECASE):
+	    elif skillpattern.search(message):
 	        try:
 	            temp = re.sub("!skill ", "", message).lower()
 	            return (data.skill_parameters[temp])
 	        except:
 	            return (f"Sorry, could not find {temp}. Please check your spelling "
 	                  f"and try again.")
-	    elif re.search(bosspattern, message, re.IGNORECASE):
+	    elif bosspattern.search(message):
 	        try:
 	            temp = re.sub("!boss ", "", message).lower()
 	            return (data.boss_moves[temp])
 	        except:
 	            return (f"Sorry, could not find {temp}. Please check your spelling "
 	                  f"and try again.")
-	    elif re.search(toolpattern, message, re.IGNORECASE):
-	        try:
-	            temp = re.sub("!tool ", "", message).lower()
-	            return (data.tools[temp])
-	        except:
-	            return (f"Sorry, could not find {temp}. Please check your spelling "
-	                  f"and try again.")
-	    elif re.search(codepattern, message, re.IGNORECASE):
+	    elif codepattern.search(message):
 	        try:
 	            temp = re.sub("!code ", "", message).lower()
 	            return (data.codes[temp])
 	        except:
 	            return (f"Sorry, could not find {temp}. Please check your spelling "
 	                  f"and try again.")
-	    elif re.search(itempattern, message, re.IGNORECASE):
+	    elif itempattern.search(message):
 	        try:
 	            temp = re.sub("!item ", "", message).lower()
 	            return (data.item_table[temp])
 	        except:
 	            return (f"Sorry, could not find {temp}. Please check your spelling "
 	                  f"and try again.")
-	    elif re.search(specialequipmentpattern, message, re.IGNORECASE):
+	    elif toolpattern.search(message):
+	        try:
+	            temp = re.sub("!tool ", "", message).lower()
+	            return (data.tools[temp])
+	        except:
+	            return (f"Sorry, could not find {temp}. Please check your spelling "
+	                  f"and try again.")
+	    elif specialequipmentpattern.search(message):
 	        try:
 	            temp = re.sub("!specialequipment ", "", message).lower()
 	            return (data.special_equipment[temp])
 	        except:
 	            return (f"Sorry, could not find {temp}. Please check your spelling "
 	                  f"and try again.")
-	    elif re.search(specialweaponpattern, message, re.IGNORECASE):
+	    elif specialweaponpattern.search(message):
 	        try:
 	            temp = re.sub("!specialweapon ", "", message).lower()
 	            return (data.special_weapons[temp])
 	        except:
 	            return (f"Sorry, could not find {temp}. Please check your spelling "
 	                  f"and try again.")
-	    elif re.search(statuseffectpattern, message, re.IGNORECASE):
+	    elif statuseffectpattern.search(message):
 	        try:
 	            temp = re.sub("!statuseffect ", "", message).lower()
 	            return (data.status_effects[temp])
 	        except:
 	            pass
-	    elif re.search(rootpattern, message, re.IGNORECASE):
+	    elif rootpattern.search(message):
 	        try:
 	            temp = re.sub("!base ", "", message)
 	            return (data.root_table[temp])
@@ -312,9 +312,9 @@ class DiscordCecilBot(commands.Cog):
 	                  f"and try again. REMEMBER: capitalization matters!")
 
 
-	    elif re.search(hellopattern, message, re.IGNORECASE):
+	    elif hellopattern.search(message):
 	        return f"Hello {author}!"
-	    elif re.search(commandspattern, message, re.IGNORECASE):
+	    elif commandspattern.search(message):
 	        return "Basic commands: !hello, !about, !getBC, !discord, !beyondchaos, !permadeath \n" \
 	               "<!R[spell] commands: ex.'!RTime'> \n" \
 	               "<!Skill [SkillName] commands: ex.'!skill fire 3'> \n" \
@@ -325,31 +325,31 @@ class DiscordCecilBot(commands.Cog):
 	               "<!Base [SkillBase] commands: ex. '!base Fir'> \n" \
 	               "<!SpecialEquipment [EquipName] commands: ex. '!specialequipment red duster'> \n" \
 	               "<!SpecialWeapons [WeaponName] commands: ex. '!specialweapon portal gun'> \n"
-	    elif re.search(beyondchaospattern, message, re.IGNORECASE):
+	    elif beyondchaospattern.search(message):
 	        return "Originally developed by Abyssonym, but now maintained by SubtractionSoup, " \
 	               "Beyond Chaos is a randomizer, a program that remixes game content randomly, " \
 	               "for FF6. Every time you run Beyond Chaos, it will generate a completely unique, " \
 	               "brand-new mod of FF6 for you to challenge and explore. There are over 10 billion " \
 	               "different possible randomizations! Nearly everything is randomized, " \
 	               "including treasure, enemies, colors, graphics, character abilities, and more."
-	    elif re.search(getbcpattern, message, re.IGNORECASE):
+	    elif getbcpattern.search(message):
 	        return "Current EX version by SubtractionSoup: https://github.com/subtractionsoup/beyondchaos/releases/latest"
-	    elif re.search(discordpattern, message, re.IGNORECASE):
+	    elif discordpattern.search(message):
 	        return "Check out the Beyond Chaos Barracks - https://discord.gg/S3G3UXy"
-	    elif re.search(permadeath, message, re.IGNORECASE):
+	    elif permadeath.search(message):
 	        return "Permadeath means starting a new randomized game upon game over"
-	    elif re.search(aboutpattern, message, re.IGNORECASE):
+	    elif aboutpattern.search(message):
 	        return "CecilBot is a program to help players by providing a list of skills and " \
 	               "spells within each skill-set. CecilBot was made by GreenKnight5 and inspired by " \
 	               "FF6Rando community member Cecil188, and uses databases authored by Cecil188. " \
 	               "Please PM any questions, comments, concerns to @GreenKnight5,  @Cecil188, or @RazzleStorm."
-	    elif re.search(helppattern, message, re.IGNORECASE):
+	    elif helppattern.search(message):
 	        text = "The Discord Cecilbot should function almost exactly " \
 	        "like your familiar Twitch Cecilbot. Type !commands to see " \
 	        "the most common commands and their syntax. Check the pins in " \
 	        "this channel for a more detailed explanation."
 	        return text
-	    elif re.search(communitycommandpattern, message, re.IGNORECASE):
+	    elif communitycommandpattern.search(message):
 	        try:
 	            temp = re.sub("!", "", message).lower()
 	            return (data.commands[temp])
