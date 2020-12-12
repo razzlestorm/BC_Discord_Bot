@@ -4,6 +4,7 @@ import re
 from os import path
 import xlrd
 import pprint
+from configparser import ConfigParser
 
 # Open specified excel file and read data from file.
 # Warning: when files are updated and their names get changed, you

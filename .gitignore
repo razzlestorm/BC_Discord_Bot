@@ -10,6 +10,9 @@
 *.pdb
 *.sqlite3
 
+### Config ###
+*.ini
+
 ### dotenv ###
 .env
 .env.sample
