@@ -203,7 +203,7 @@ class DiscordCecilBot(commands.Cog):
 	    #Data lookup patterns
 	    rchaospattern = re.compile(r"\A!r-?chaos", re.IGNORECASE)
 	    rcommandpattern = re.compile(r"\A!r-?\w*", re.IGNORECASE)
-	    wcommandpattern = re.compile(r"\A![w|?|3x]-\w*", re.IGNORECASE)
+	    wcommandpattern = re.compile(r"\A![w|?|3x]-?\w*", re.IGNORECASE)
 	    skillpattern = re.compile(r"\A!skill\s.*", re.IGNORECASE)
 	    bosspattern = re.compile(r"\A!boss\s.*", re.IGNORECASE)
 	    codepattern = re.compile(r"\A!code[s]?\s\w*", re.IGNORECASE)
