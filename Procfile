@@ -1,1 +1,1 @@
-worker: python CecilBot\__main__.py
+worker: python CecilBot/__main__.py
