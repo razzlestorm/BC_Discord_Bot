@@ -59,12 +59,13 @@ def open_mei_fallback(filename, mode='r'):
 print(tblpath)
 # Make RE read/do this in the future for any version
 # Potentially create a database for this
-BOSS_MOVES_TABLE = path.join(tblpath, "Boss Moves v7.1.xls")
-CODES_TABLE = path.join(tblpath, "Codes v5.1.xls")
+BOSS_DISAMBIGUATIONS = path.join(tblpath, "Boss Disambiguations v1.xls")
+BOSS_MOVES_TABLE = path.join(tblpath, "Boss Moves v7.2.xls")
+CODES_TABLE = path.join(tblpath, "Codes v5.2.xls")
 ITEM_TABLE = path.join(tblpath, "Item Table v2.xls")
-RANDOM_SKILLSETS_TABLE = path.join(tblpath, "Random Skillsets v2.xls")
+RANDOM_SKILLSETS_TABLE = path.join(tblpath, "Random Skillsets v2.1.xls")
 ROOT_TABLE = path.join(tblpath, "Root Table v4.xls")
-SKILL_PARAMETERS_TABLE = path.join(tblpath, "Skill Parameters v3.1.xls")
+SKILL_PARAMETERS_TABLE = path.join(tblpath, "Skill Parameters v3.2.xls")
 SPECIAL_EQUIPMENT_TABLE = path.join(tblpath, "Special Equipment v3.xls")
 SPECIAL_WEAPONS_TABLE = path.join(tblpath, "Special Weapons v4.xls")
 STATUS_EFFECTS_TABLE = path.join(tblpath, "Status Effects v3.xls")
@@ -76,6 +77,9 @@ TOOLS_TABLE = path.join(tblpath, "Tools List v1.xls")
 class Data:
     def __init__(self):
         self.boss_moves = dict_builder(BOSS_MOVES_TABLE)
+        # Updates the boss_moves table with boss_disambiguations instead of
+        # individually handling it in the command logic
+        self.boss_moves.update(dict_builder(BOSS_DISAMBIGUATIONS))
         self.codes = dict_builder(CODES_TABLE)
         self.item_table = dict_builder(ITEM_TABLE)
         self.random_skillsets = dict_builder(RANDOM_SKILLSETS_TABLE)
@@ -310,7 +314,8 @@ class DiscordCecilBot(commands.Cog):
 	            return (data.root_table[temp])
 	        except:
 	            return (f"Sorry, could not find {temp}. Please check your spelling "
-	                  f"and try again. REMEMBER: capitalization matters!")
+	                  f"and try again. REMEMBER: Bases are only up to "
+                      f"four letters long, and capitalization matters!")
 
 
 	    elif hellopattern.search(message):
@@ -334,7 +339,7 @@ class DiscordCecilBot(commands.Cog):
 	               "different possible randomizations! Nearly everything is randomized, " \
 	               "including treasure, enemies, colors, graphics, character abilities, and more."
 	    elif getbcpattern.search(message):
-	        return "Current EX version by SubtractionSoup: https://github.com/subtractionsoup/beyondchaos/releases/latest"
+	        return "Current CE version by DarkSlash: https://github.com/FF6BeyondChaos/BeyondChaosRandomizer/releases/latest"
 	    elif discordpattern.search(message):
 	        return "Check out the Beyond Chaos Barracks - https://discord.gg/S3G3UXy"
 	    elif permadeath.search(message):
