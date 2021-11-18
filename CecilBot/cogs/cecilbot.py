@@ -224,7 +224,7 @@ class DiscordCecilBot(commands.Cog):
 	    commandspattern = re.compile(r"\A!command[s]?", re.IGNORECASE)
 	    beyondchaospattern = re.compile("\A!beyondchaos", re.IGNORECASE)
 	    getbcpattern = re.compile(r"\A!getbc", re.IGNORECASE)
-	    discordpattern = re.compile(r"\A!discord", re.IGNORECASE)
+	    discordpattern = re.compile(r"\A!(bc){0,1}(discord){0,1}", re.IGNORECASE)
 	    permadeath = re.compile(r"\A!permadeath", re.IGNORECASE)
 	    aboutpattern = re.compile(r"\A!about", re.IGNORECASE)
 	    helppattern = re.compile(r"\A!help", re.IGNORECASE)
