@@ -61,7 +61,7 @@ print(tblpath)
 # Potentially create a database for this
 BOSS_DISAMBIGUATIONS = path.join(tblpath, "Boss Disambiguations v1.xls")
 BOSS_MOVES_TABLE = path.join(tblpath, "Boss Moves v7.2.xls")
-CODES_TABLE = path.join(tblpath, "Codes v5.2.xls")
+CODES_TABLE = path.join(tblpath, "Codes v6.xls")
 ITEM_TABLE = path.join(tblpath, "Item Table v2.xls")
 RANDOM_SKILLSETS_TABLE = path.join(tblpath, "Random Skillsets v2.1.xls")
 ROOT_TABLE = path.join(tblpath, "Root Table v4.xls")
