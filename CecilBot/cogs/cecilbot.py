@@ -49,7 +49,7 @@ def generate_correction(orig_text: str, checklist: dict):
 	def edits1(word):
 		"All edits that are one edit away from `word`"
 		letters = "abcdefghijklmnopqrstuvwxyz"
-		symbols = "-.0123456789"
+		symbols = "-.0123456789 "
 		letters += letters.upper() + symbols
 		splits = [(word[:i], word[i:]) for i in range(len(word) + 1)]
 		deletes = [L + R[1:] for L, R in splits if R]
