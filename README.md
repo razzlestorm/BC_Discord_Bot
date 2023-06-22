@@ -16,3 +16,8 @@ To deploy, you will need to have this hosted either on your own machine, or on a
 
 * [Discord.py](https://discordpy.readthedocs.io/en/latest/)
 
+## TODO
+* Rework bot to use new Discord API with slash commands
+* Have slash commands prepopulate as user types so there are fewer mispellings (if possible with API).
+* Turn spreadsheets into database
+* Allow mods to add data via slash commands
