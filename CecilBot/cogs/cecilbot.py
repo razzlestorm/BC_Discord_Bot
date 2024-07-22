@@ -77,22 +77,6 @@ except ImportError:
 
 	MEI = False
 
-# Probably not needed
-def open_mei_fallback(filename, mode='r'):
-	# this prepends the absolute file path of the calling script
-	#   to the file passed as a param - GreenKnight5
-	filename = path.join(path.dirname(path.abspath(__file__)), filename)
-
-	if not MEI:
-		return open(filename, mode)
-
-	try:
-		f = open(filename, mode)
-	except IOError:
-		f = open(path.join(_MEIPASS, filename), mode)
-	return f
-
-print(tblpath)
 # Make RE read/do this in the future for any version
 # Potentially create a database for this
 BOSS_DISAMBIGUATIONS = path.join(tblpath, "Boss Disambiguations v1.xls")
@@ -239,6 +223,36 @@ class DiscordCecilBot(commands.Cog):
 		self.client = client
 		self._last_member = None
 		self.printer = pprint.PrettyPrinter(indent=2, width=105)
+        self.logger = logging.getLogger(__name__)
+        self.logger.info('CecilBot Cog instance created')
+
+    @app_commands.describe(
+        query="any string, like 'Ultros', 'Bolt 3', etc.",
+    )
+    @app_commands.command()
+    async def lookup(self, interaction: discord.Interaction, query: str) -> None:
+        """
+		Look up anything!
+        """
+		# load in all data dicts 
+		# check through keys and then return value of query
+		# return correction if not found
+            await interaction.response.send_message(f"{interaction.user.name}, I've recorded the following activity:"
+                           f"\n{msgs}\nAwesome work! Try typing"
+                           " `/list_gains` or `/see_gains` to see the totals"
+                           " of your activities!")
+
+	@lookup.autocomplete("query")
+	async def query_autocomplete(
+			interaction: discord.Interaction,
+			current: str,
+		) -> List[app_commands.Choice[str]]
+		
+		# get data 
+		# make available
+		# it's probably not a lot.
+		return results
+
 
 	def command_lookup(self, author, message):
 		#Data lookup patterns
@@ -505,10 +519,25 @@ class DiscordCecilBot(commands.Cog):
 		await ctx.send(data.random_skillsets['r' + argument.lower()])
 	'''
 
-def setup(client):
+    @app_commands.command()
+    async def github(self, interaction: discord.Interaction) -> None:
+        """Display link to the GitHub, so you can read or contribute to my code!"""
+        embed = discord.Embed()
+        embed.description = (
+                            "My code is available to peruse and contribute to on"
+                            " [GitHub](https://github.com/razzlestorm/gainsworth). You"
+                            " can also visit my "
+                            "[Discussions Page]"
+                            "(https://github.com/razzlestorm/gainsworth/discussions)"
+                            " to make suggestions, flesh out ideas, or show off how"
+                            " I'm working in your server!"
+                            )
+        await interaction.response.send_message(embed=embed)
+
+async def setup(client):
 	"""
 	This setup function must exist in every cog file and will ultimately have a
 	nearly identical signature and logic to what you're seeing here.
 	It's ultimately what loads the Cog into the bot.
 	"""
-	client.add_cog(DiscordCecilBot(client))
+	await client.add_cog(DiscordCecilBot(client))
