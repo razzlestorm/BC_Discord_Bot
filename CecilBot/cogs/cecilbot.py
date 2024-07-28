@@ -50,7 +50,7 @@ class DiscordCecilBot(commands.Cog):
             return
 
         else:
-            await interaction.response.send_message(self.data[table][query])
+            await interaction.response.send_message(self.printer.pformat(self.data[table][query]))
 
     @lookup.autocomplete("table")
     async def query_autocomplete(
@@ -82,12 +82,14 @@ class DiscordCecilBot(commands.Cog):
     async def beyondchaos(self, interaction: discord.Interaction):
 
         await interaction.response.send_message(
+            self.printer.pformat(
             "Originally developed by Abyssonym, but now maintained by SubtractionSoup, "
             "Beyond Chaos is a randomizer, a program that remixes game content randomly, "
             "for FF6. Every time you run Beyond Chaos, it will generate a completely unique, "
             "brand-new mod of FF6 for you to challenge and explore. There are over 10 billion "
             "different possible randomizations! Nearly everything is randomized, "
             "including treasure, enemies, colors, graphics, character abilities, and more."
+            )
         )
         return
 
@@ -95,10 +97,12 @@ class DiscordCecilBot(commands.Cog):
     async def w(self, interaction: discord.Interaction):
 
         await interaction.response.send_message(
+            self.printer.pformat(
             "W-/?-/3x-[spellset] is just like r-[spellset] but "
             "gets cast more than once. NOTE: These spellsets that "
             "include Spiraler, Quadra Slam, and/or Quadra Slice will "
             "not cast those spells!"
+            )
         )
         return
 
@@ -122,10 +126,12 @@ class DiscordCecilBot(commands.Cog):
     async def about(self, interaction: discord.Interaction):
 
         await interaction.response.send_message(
+            self.printer.pformat(
             "CecilBot is a program to help players by providing a list of skills and "
             "spells within each skill-set. CecilBot was made by GreenKnight5 and inspired by "
             "FF6Rando community member Cecil188, and uses databases authored by Cecil188. "
             "Please PM any questions, comments, concerns to @GreenKnight5,  @Cecil188, or @RazzleStorm."
+            )
         )
         return
 
@@ -148,27 +154,6 @@ class DiscordCecilBot(commands.Cog):
         """
         print("CecilBot extension has been loaded")
 
-    """
-    @commands.Cog.listener()
-    async def on_message(self, message):
-        channel = message.channel
-        channels = ["ask-cecilbot"]
-        if message.author == self.client.user:
-            return
-        if channel.name in channels:
-            if message.content.startswith("!"):
-                # await channel.send(message.content)
-                # Pprint pretiffies everything, and then calls GK's command_lookup function
-                to_send = self.command_lookup(message.author, message.content)
-                if isinstance(to_send, dict):
-                    pretty_message = self.printer.pformat(to_send)
-                    if "response" in to_send:
-                        pretty_message = to_send["response"]
-                    await channel.send(pretty_message)
-                else:
-                    pretty_message = eval(self.printer.pformat(to_send))
-                    await channel.send(pretty_message)
-    """
 
     @commands.command()
     async def hello(
@@ -183,14 +168,6 @@ class DiscordCecilBot(commands.Cog):
             await ctx.send("Hello {0.name}... This feels familiar.".format(member))
         self._last_member = member
 
-    """
-    @commands.command(name='r-')
-    async def _r(self, ctx, argument):
-        print(argument)
-        if '-' in argument:
-            argument = argument[1:]
-        await ctx.send(data.random_skillsets['r' + argument.lower()])
-    """
 
     @app_commands.command()
     async def github(self, interaction: discord.Interaction) -> None:
