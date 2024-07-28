@@ -45,7 +45,6 @@ class Bot(commands.Bot):
     async def on_ready(self):
         print(f"CecilBot is here to party!")
 
-
 bot = Bot()
 
 async def load_cogs(b):
@@ -55,6 +54,13 @@ async def load_cogs(b):
         print(f"Found cog: 'cog.{cog.name[:-3]}'")
         await b.load_extension(f"CecilBot.cogs.{cog.name[:-3]}")
 
+@bot.event
+async def on_ready():
+    # Register Cogs with bot
+    commands = await bot.tree.sync()
+    # bot.tree.clear_commands(guild=discord.Object(id="740310401001980036"))
+    print(f"CecilBot synced these commands: {commands}")
+    print("CecilBot is finished loading!")
 
 async def main():
     async with bot:
