@@ -36,21 +36,46 @@ class DiscordCecilBot(commands.Cog):
         """
         Look up anything! Just use a slash command and then fill in the fields. They will autocomplete as you type!
         """
+        if table in self.data.keys():
+            if query in self.data[table]:
+                await interaction.response.send_message(self.printer.pformat(self.data[table][query]))
+                return
 
-        if table not in self.data.keys():
-            await interaction.response.send_message(
-                f"{table} isn't one of the available tables to look things up in."
-            )
-            return
+        elif table not in self.data.keys():
+            found = False
+            for key in self.data.keys():
+                if table.casefold() == key.casefold():
+                    table = table.capitalize()
+                    found = True
+                    break
+                    
+            if not found:
+                await interaction.response.send_message(
+                    f"{table} isn't one of the available tables to look things up in."
+                )
+                return
 
-        elif query not in self.data[table]:
-            await interaction.response.send_message(
-                f"Sorry, could not find {query}. Try using the autocomplete feature. It might take a second or two to populate."
-            )
-            return
+        if query not in self.data[table]:
+            found = False
+            for key in self.data[table].keys():
+                if query.casefold() == key.casefold():
+                    query = query.capitalize()
+                    found = True
+                    break
+            if not found:
+                await interaction.response.send_message(
+                    f"Sorry, could not find {query}. Try using the autocomplete feature. It might take a second or two to populate."
+                )
+                return
+            else:
+                await interaction.response.send_message(self.printer.pformat(self.data[table][query]))
+                return
 
         else:
             await interaction.response.send_message(self.printer.pformat(self.data[table][query]))
+            return
+
+
 
     @lookup.autocomplete("table")
     async def query_autocomplete(
