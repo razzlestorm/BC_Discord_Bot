@@ -48,7 +48,6 @@ class DiscordCecilBot(commands.Cog):
                     table = table.capitalize()
                     found = True
                     break
-                    
             if not found:
                 await interaction.response.send_message(
                     f"{table} isn't one of the available tables to look things up in."
@@ -59,7 +58,7 @@ class DiscordCecilBot(commands.Cog):
             found = False
             for key in self.data[table].keys():
                 if query.casefold() == key.casefold():
-                    query = query.capitalize()
+                    query = query.lower()
                     found = True
                     break
             if not found:
